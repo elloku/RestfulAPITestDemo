@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace RestfulAPITestDemo
@@ -34,22 +35,70 @@ namespace RestfulAPITestDemo
 
         private void buttonGet_Click(object sender, EventArgs e)
         {
-            RestClient.HttpRequest("127.0.0.1", "31001", "/mcrp-prod-chanpinzx/api/ChanPin", RestClient.HttpType.GET);
+            this.richTextBox1.Text =  HttpWebRequestHelper.HttpRequest("GET");
         }
 
         private void buttonPost_Click(object sender, EventArgs e)
         {
-            RestClient.HttpRequest("127.0.0.1", "31001", "/mcrp-prod-chanpinzx/api/ChanPin", RestClient.HttpType.POST,);
+            ChanPinDTO chanPin = new ChanPinDTO
+            {
+                Id = "739769244446625796",
+                ChanPinMc = "api调用测试",
+                WangGuanLj = "abc",
+                GitFuWuQ = null,
+                QunZuMc = "123",
+                ChanPinBS = "api调用测试",
+                GitYongHuM = null,
+                GitMiMa = null,
+                BeiZhu = null,
+                ChanPinFZR = null,
+                ChanPinFZRXM = null,
+                KaiFaFZR = null,
+                KaiFaFZRXM = null,
+                TiYanFZR = null,
+                TiYanFZRXM = null,
+                CeShiFZR = null,
+                CeShiFZRXM = null
+            };
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var data = serializer.Serialize(chanPin);
+            HttpWebRequestHelper.Post(data);
         }
 
         private void buttonPut_Click(object sender, EventArgs e)
         {
-            RestClient.HttpRequest("127.0.0.1", "31001", "/mcrp-prod-chanpinzx/api/ChanPin", RestClient.HttpType.PUT);
+            ChanPinDTO chanPin = new ChanPinDTO
+            {
+                Id = "739769244446625796",
+                ChanPinMc = "api调用测试Put",
+                WangGuanLj = "abc",
+                GitFuWuQ = null,
+                QunZuMc = "123",
+                ChanPinBS = "api调用测试Put",
+                GitYongHuM = null,
+                GitMiMa = null,
+                BeiZhu = null,
+                ChanPinFZR = null,
+                ChanPinFZRXM = null,
+                KaiFaFZR = null,
+                KaiFaFZRXM = null,
+                TiYanFZR = null,
+                TiYanFZRXM = null,
+                CeShiFZR = null,
+                CeShiFZRXM = null
+            };
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var data = serializer.Serialize(chanPin);
+            HttpWebRequestHelper.Put(data);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            RestClient.HttpRequest("127.0.0.1", "31001", "/mcrp-prod-chanpinzx/api/ChanPin", RestClient.HttpType.DELETE);
+            HttpWebRequestHelper.Delete();
         }
+
+        /*{"Id":"739769244446625793","ChanPinMc":"api调用测试","WangGuanLj":"abc","GitFuWuQ":null,"QunZuMc":"123","ChanPinBS":"api调用测试","GitYongHuM":null,"GitMiMa":null,"BeiZhu":null,"ChanPinFZR":null,"ChanPinFZRXM":null,"KaiFaFZR":null,"KaiFaFZRXM":null,"TiYanFZR":null,"TiYanFZRXM":null,"CeShiFZR":null,"CeShiFZRXM":null}*/
     }
 }
